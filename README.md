@@ -23,5 +23,5 @@
 
 <p align="center">
   <strong>Enlace del proyecto:</strong><br>
-  <a href="https://github.com/Menendez2004/Datawarehouse/tree/desafio-1/desafio%201">github.com/Menendez2004/Datawarehouse/tree/desafio-1</a>
+  <a href="https://github.com/Menendez2004/Datawarehouse/tree/desafio-1/superstore-project">github.com/Menendez2004/Datawarehouse/tree/desafio-1</a>
 </p>
