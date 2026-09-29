@@ -1,0 +1,24 @@
+{
+  "name": "superstore-etl",
+  "version": "1.0.0",
+  "description": "Desafio Practico 1 - Datawarehouse y Mineria de Datos - UDB",
+  "main": "dist/index.js",
+  "packageManager": "pnpm@12.4.1",
+  "scripts": {
+    "build": "tsc",
+    "explore": "ts-node src/explore.ts",
+    "clean": "ts-node src/clean.ts",
+    "load": "ts-node src/load.ts"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "dotenv": "^17.4.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/pg": "^8.11.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}
