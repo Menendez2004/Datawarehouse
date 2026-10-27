@@ -33,12 +33,8 @@ NAVY = RGBColor(0x1F, 0x38, 0x64)
 ACCENT_HEX = "2C5F8A"
 LIGHT_HEX = "F2F5F8"
 
-# ---------- Integrantes (completar) ----------
 INTEGRANTES = [
     ("Kevin Edenilson Menéndez Zepeda", "MZ232727"),
-    ("Nombre del integrante 2", "Carné"),
-    ("Nombre del integrante 3", "Carné"),
-    ("Nombre del integrante 4", "Carné"),
 ]
 DOCENTE = "Ing. David Enrique Moya"
 FECHA_ENTREGA = "23 de octubre de 2026"
@@ -171,16 +167,16 @@ def diagrama_estrella(path):
 
 CRONOGRAMA = [
     # (actividad, inicio, fin, responsable)
-    ("Configuración del entorno (PostgreSQL, Power BI, repositorio)", "2026-10-27", "2026-10-29", "Integrante 1"),
-    ("Creación del esquema del DW (script DDL)", "2026-10-30", "2026-11-02", "Integrante 1"),
-    ("ETL: extracción y perfilado del Excel", "2026-11-03", "2026-11-05", "Integrante 2"),
-    ("ETL: transformación y limpieza", "2026-11-06", "2026-11-11", "Integrante 2"),
-    ("ETL: carga y validación (conteos y sumas)", "2026-11-12", "2026-11-14", "Integrante 3"),
-    ("Modelo de Power BI y medidas DAX de los KPIs", "2026-11-15", "2026-11-20", "Integrante 3"),
-    ("Segmentación de clientes con K-means", "2026-11-18", "2026-11-23", "Integrante 4"),
-    ("Dashboard interactivo de finanzas y ventas", "2026-11-21", "2026-11-27", "Integrante 4"),
-    ("Pruebas, validación de KPIs y correcciones", "2026-11-28", "2026-12-01", "Todo el equipo"),
-    ("Documentación final y presentación", "2026-12-02", "2026-12-06", "Todo el equipo"),
+    ("Configuración del entorno (PostgreSQL, Power BI, repositorio)", "2026-10-27", "2026-10-29", "Kevin Menéndez"),
+    ("Creación del esquema del DW (script DDL)", "2026-10-30", "2026-11-02", "Kevin Menéndez"),
+    ("ETL: extracción y perfilado del Excel", "2026-11-03", "2026-11-05", "Kevin Menéndez"),
+    ("ETL: transformación y limpieza", "2026-11-06", "2026-11-11", "Kevin Menéndez"),
+    ("ETL: carga y validación (conteos y sumas)", "2026-11-12", "2026-11-14", "Kevin Menéndez"),
+    ("Modelo de Power BI y medidas DAX de los KPIs", "2026-11-15", "2026-11-20", "Kevin Menéndez"),
+    ("Segmentación de clientes con K-means", "2026-11-18", "2026-11-23", "Kevin Menéndez"),
+    ("Dashboard interactivo de finanzas y ventas", "2026-11-21", "2026-11-27", "Kevin Menéndez"),
+    ("Pruebas, validación de KPIs y correcciones", "2026-11-28", "2026-12-01", "Kevin Menéndez"),
+    ("Documentación final y presentación", "2026-12-02", "2026-12-06", "Kevin Menéndez"),
 ]
 
 
@@ -310,7 +306,7 @@ def construir(perfil):
     centrado("Proyecto de Cátedra — Fase 1", 18, True, NAVY)
     centrado("Propuesta del proyecto y diseño del Datawarehouse", 13, cursiva=True)
     centrado("Caso: Global Electronic Retail (SAC Retailer Dataset)", 12, espacio=28)
-    centrado("Integrantes", 12, True)
+    centrado("Integrantes" if len(INTEGRANTES) > 1 else "Alumno", 12, True)
     t = doc.add_table(rows=1, cols=2)
     t.style = "Table Grid"
     t.alignment = WD_TABLE_ALIGNMENT.CENTER

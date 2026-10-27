@@ -18,4 +18,4 @@ Propuesta y diseño del Datawarehouse para **Global Electronic Retail** (`SAC Re
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python docs/build_doc.py "../SAC Retailer Dataset.xlsx"
 ```
-Los nombres de los integrantes se editan en la lista `INTEGRANTES` de `docs/build_doc.py`.
+Los datos de la portada (alumno, docente, fecha) se editan al inicio de `docs/build_doc.py`.
