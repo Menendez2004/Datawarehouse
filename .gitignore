@@ -141,3 +141,16 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# ---- Desafio Practico 2 (SQL Server / SSAS / Power BI) ----
+# Backups y archivos de base de datos (muy pesados, no se suben)
+*.bak
+*.mdf
+*.ldf
+*.ndf
+# Artefactos de compilacion de proyectos SSAS / Visual Studio
+adventureworks-olap/olap/**/bin/
+adventureworks-olap/olap/**/obj/
+.vs/
+*.user
+*.suo
