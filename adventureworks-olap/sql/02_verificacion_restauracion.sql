@@ -22,7 +22,10 @@ FROM sys.tables t
 JOIN sys.schemas s    ON s.schema_id = t.schema_id
 JOIN sys.partitions p ON p.object_id = t.object_id AND p.index_id IN (0, 1)
 GROUP BY s.name, t.name
-ORDER BY Tipo DESC, Filas DESC;
+ORDER BY CASE WHEN t.name LIKE 'Fact%' THEN 1
+              WHEN t.name LIKE 'Dim%'  THEN 2
+              ELSE 3 END,
+         Filas DESC;
 GO
 
 -- 2.3 Relaciones (llaves foráneas) de la tabla de hechos principal
