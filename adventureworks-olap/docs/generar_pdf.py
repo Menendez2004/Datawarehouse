@@ -10,6 +10,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 from PIL import Image as PILImage
 
 IMG, OUT = sys.argv[1], sys.argv[2]
+LOGO = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "logo_udb.png")
 NOMBRE = "Kevin Menéndez"
 CARNE = "MZ232727"
 DOCENTE = "________________________________"
@@ -94,33 +95,34 @@ def cover(c, d):
     W, H = letter
     c.saveState()
     c.setFillColor(AZUL)
-    c.rect(0, H - 1.6 * inch, W, 1.6 * inch, fill=1, stroke=0)
+    c.rect(0, H - 0.25 * inch, W, 0.25 * inch, fill=1, stroke=0)
     c.rect(0, 0, W, 0.5 * inch, fill=1, stroke=0)
-    c.setFillColor(colors.white)
-    c.setFont("Helvetica-Bold", 24)
-    c.drawCentredString(W / 2, H - 0.85 * inch, "UNIVERSIDAD DON BOSCO")
-    c.setFont("Helvetica", 12)
-    c.drawCentredString(W / 2, H - 1.2 * inch, "Facultad de Ingeniería · Educación a Distancia (UDB Virtual)")
+    lw = 2.6 * inch
+    lh = lw * 416 / 738
+    c.drawImage(LOGO, (W - lw) / 2, H - 0.55 * inch - lh, lw, lh, mask="auto")
+    c.setFillColor(GRIS)
+    c.setFont("Helvetica", 11)
+    c.drawCentredString(W / 2, H - 0.85 * inch - lh, "Facultad de Ingeniería · Educación a Distancia")
     c.setFillColor(AZUL)
     c.setFont("Helvetica", 15)
-    c.drawCentredString(W / 2, H - 2.5 * inch, "Datawarehouse y Minería de Datos (DMD941)")
+    c.drawCentredString(W / 2, H - 3.05 * inch, "Datawarehouse y Minería de Datos (DMD941)")
     c.setFillColor(colors.black)
-    c.setFont("Helvetica", 12.5)
-    c.drawCentredString(W / 2, H - 2.85 * inch, "Desafío Práctico 2 — Experiencia de Aprendizaje 1")
+    c.setFont("Helvetica-Bold", 14)
+    c.drawCentredString(W / 2, H - 3.4 * inch, "Desafío Práctico 2")
     c.setFillColor(AZUL)
     c.setFont("Helvetica-Bold", 28)
-    c.drawCentredString(W / 2, H - 3.85 * inch, "Documento Técnico")
+    c.drawCentredString(W / 2, H - 4.2 * inch, "Documento Técnico")
     c.setFont("Helvetica-Oblique", 13)
     c.setFillColor(GRIS)
-    c.drawCentredString(W / 2, H - 4.3 * inch, "Cubo OLAP, Consultas de Negocio y Visualización en Power BI")
-    c.drawCentredString(W / 2, H - 4.58 * inch, "AdventureWorksDW2022")
+    c.drawCentredString(W / 2, H - 4.6 * inch, "Cubo OLAP, Consultas de Negocio y Visualización en Power BI")
+    c.drawCentredString(W / 2, H - 4.88 * inch, "AdventureWorksDW2022")
     c.setStrokeColor(AZUL)
     c.setLineWidth(1.2)
-    c.line(2 * inch, H - 4.95 * inch, W - 2 * inch, H - 4.95 * inch)
+    c.line(2 * inch, H - 5.2 * inch, W - 2 * inch, H - 5.2 * inch)
     rows = [("Alumno:", NOMBRE), ("Carné:", CARNE), ("Docente:", "Ing. David Enrique Moya Aguilar"),
             ("Fecha de entrega:", "6 de noviembre"),
             ("Stack técnico:", "SQL Server 2022 + SSAS + Visual Studio + Power BI")]
-    y = H - 5.7 * inch
+    y = H - 5.85 * inch
     for k, v in rows:
         c.setFont("Helvetica-Bold", 12)
         c.setFillColor(AZUL)
