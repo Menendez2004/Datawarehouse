@@ -125,7 +125,7 @@ def cover(c, d):
         y -= 0.38 * inch
     c.setFont("Helvetica", 10)
     c.setFillColor(GRIS)
-    c.drawCentredString(W / 2, 1.0 * inch, "Repositorio: https://github.com/menendez2004/datawarehouse")
+    c.drawCentredString(W / 2, 1.0 * inch, "Repositorio: https://github.com/menendez2004/datawarehouse  ·  Rama: desafio-practico-2")
     c.restoreState()
 
 doc = Doc(OUT, pagesize=letter, leftMargin=inch, rightMargin=inch, topMargin=0.85 * inch,
@@ -440,7 +440,24 @@ S += bullets([
 ])
 S.append(Paragraph("12. Repositorio", H1))
 S.append(p("Los scripts SQL, las consultas MDX, el proyecto del cubo, el archivo de Power BI y este documento están "
-           "disponibles en: <b>https://github.com/menendez2004/datawarehouse</b> (carpeta <i>adventureworks-olap</i>)."))
+           "disponibles en el repositorio de GitHub. Todo el trabajo de este desafío se realizó en la rama "
+           "<b>desafio-practico-2</b>."))
+S.append(table([
+    ["Elemento", "Valor"],
+    ["Repositorio", "https://github.com/menendez2004/datawarehouse"],
+    ["Rama de trabajo", "desafio-practico-2"],
+    ["Enlace directo a la rama", "https://github.com/menendez2004/datawarehouse/tree/desafio-practico-2"],
+    ["Carpeta del desafío", "adventureworks-olap/"],
+], [1.9 * inch, 4.6 * inch]))
+S.append(Spacer(1, 8))
+S.append(table([
+    ["Ruta", "Contenido"],
+    ["sql/", "Scripts de restauración, verificación y consultas de los 6 problemas de negocio"],
+    ["olap/AdventureWorksOLAP/", "Proyecto de Visual Studio del cubo OLAP «Ventas Internet»"],
+    ["olap/consultas_cubo.mdx", "Consultas MDX de validación del cubo"],
+    ["powerbi/", "Dashboard_AdventureWorks.pbix y su exportación a PDF"],
+    ["docs/", "Este documento, guías y script que genera el PDF"],
+], [1.9 * inch, 4.6 * inch]))
 
 doc.multiBuild(S)
 print("ok", fig_n[0])
