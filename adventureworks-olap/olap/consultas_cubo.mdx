@@ -6,13 +6,13 @@
 // Ejecute cada consulta por separado (seleccionar + F5).
 // =====================================================================
 
-// Problema 1: Ventas, utilidad y margen por año y trimestre
+// 1
 SELECT
     { [Measures].[Ventas], [Measures].[Utilidad], [Measures].[Margen Pct] } ON COLUMNS,
     NON EMPTY [Fecha].[Calendario].[Trimestre].MEMBERS ON ROWS
 FROM [Ventas Internet];
 
-// Problema 2: Categorías y subcategorías ordenadas por ventas
+// 2
 SELECT
     { [Measures].[Unidades], [Measures].[Ventas], [Measures].[Utilidad], [Measures].[Margen Pct] } ON COLUMNS,
     NON EMPTY ORDER(
@@ -21,13 +21,13 @@ SELECT
         [Measures].[Ventas], BDESC ) ON ROWS
 FROM [Ventas Internet];
 
-// Problema 3: Top 10 productos por utilidad
+// 3
 SELECT
     { [Measures].[Ventas], [Measures].[Utilidad] } ON COLUMNS,
     TOPCOUNT( [Producto].[Producto].[Producto].MEMBERS, 10, [Measures].[Utilidad] ) ON ROWS
 FROM [Ventas Internet];
 
-// Problema 4: Ventas y órdenes por grupo, país y región
+// 4
 SELECT
     { [Measures].[Ventas], [Measures].[Ordenes] } ON COLUMNS,
     NON EMPTY ORDER(
@@ -37,7 +37,7 @@ SELECT
         [Measures].[Ventas], BDESC ) ON ROWS
 FROM [Ventas Internet];
 
-// Problema 5: Perfil del cliente (género, estado civil y educación)
+// 5
 SELECT
     { [Measures].[Ventas] } ON COLUMNS,
     NON EMPTY ORDER(
@@ -47,7 +47,7 @@ SELECT
         [Measures].[Ventas], BDESC ) ON ROWS
 FROM [Ventas Internet];
 
-// Problema 6: Impacto de las promociones
+// 6
 SELECT
     { [Measures].[Ordenes], [Measures].[Unidades], [Measures].[Ventas], [Measures].[Utilidad] } ON COLUMNS,
     NON EMPTY ORDER( [Promocion].[Promocion].[Promocion].MEMBERS,
