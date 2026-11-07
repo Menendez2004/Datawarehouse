@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37827.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "AdventureWorksOLAP", "AdventureWorksOLAP\AdventureWorksOLAP.dwproj", "{12AD7A74-876C-7AA1-0353-596F9A19099F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12AD7A74-876C-7AA1-0353-596F9A19099F}.Development|Default.ActiveCfg = Development
+		{12AD7A74-876C-7AA1-0353-596F9A19099F}.Development|Default.Build.0 = Development
+		{12AD7A74-876C-7AA1-0353-596F9A19099F}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2C68E40-BB8F-4C4F-980D-861B8C8E6411}
+	EndGlobalSection
+EndGlobal
