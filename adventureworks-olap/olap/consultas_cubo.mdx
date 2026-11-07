@@ -1,22 +1,24 @@
 // =====================================================================
 // Desafío Práctico 2 - Consultas MDX para validar el cubo "Ventas Internet"
 // Ejecutar en SSMS: Connect -> Analysis Services -> New Query -> MDX
-// Los nombres de dimensiones/atributos corresponden a los definidos en
-// docs/guia_cubo_ssas.md. Ajuste si usó nombres distintos.
+// Base: AdventureWorksOLAP
 // Los resultados deben coincidir con sql/03_problemas_negocio.sql.
+// Ejecute cada consulta por separado (seleccionar + F5).
 // =====================================================================
 
-// Problema 1: Ventas y utilidad por año y trimestre
+// Problema 1: Ventas, utilidad y margen por año y trimestre
 SELECT
     { [Measures].[Ventas], [Measures].[Utilidad], [Measures].[Margen Pct] } ON COLUMNS,
     NON EMPTY [Fecha].[Calendario].[Trimestre].MEMBERS ON ROWS
 FROM [Ventas Internet];
 
-// Problema 2: Categorías y subcategorías
+// Problema 2: Categorías y subcategorías ordenadas por ventas
 SELECT
     { [Measures].[Unidades], [Measures].[Ventas], [Measures].[Utilidad], [Measures].[Margen Pct] } ON COLUMNS,
-    NON EMPTY ORDER( [Producto].[Categorias].[Subcategoria].MEMBERS,
-                     [Measures].[Ventas], BDESC ) ON ROWS
+    NON EMPTY ORDER(
+        [Producto].[Categoria].[Categoria].MEMBERS
+      * [Producto].[Subcategoria].[Subcategoria].MEMBERS,
+        [Measures].[Ventas], BDESC ) ON ROWS
 FROM [Ventas Internet];
 
 // Problema 3: Top 10 productos por utilidad
@@ -25,22 +27,29 @@ SELECT
     TOPCOUNT( [Producto].[Producto].[Producto].MEMBERS, 10, [Measures].[Utilidad] ) ON ROWS
 FROM [Ventas Internet];
 
-// Problema 4: Ventas por territorio
+// Problema 4: Ventas y órdenes por grupo, país y región
 SELECT
     { [Measures].[Ventas], [Measures].[Ordenes] } ON COLUMNS,
-    NON EMPTY [Territorio].[Territorios].[Region].MEMBERS ON ROWS
+    NON EMPTY ORDER(
+        [Territorio].[Grupo].[Grupo].MEMBERS
+      * [Territorio].[Pais].[Pais].MEMBERS
+      * [Territorio].[Region].[Region].MEMBERS,
+        [Measures].[Ventas], BDESC ) ON ROWS
 FROM [Ventas Internet];
 
-// Problema 5: Perfil del cliente
+// Problema 5: Perfil del cliente (género, estado civil y educación)
 SELECT
     { [Measures].[Ventas] } ON COLUMNS,
-    NON EMPTY [Cliente].[Genero].[Genero].MEMBERS
-            * [Cliente].[Estado Civil].[Estado Civil].MEMBERS
-            * [Cliente].[Educacion].[Educacion].MEMBERS ON ROWS
+    NON EMPTY ORDER(
+        [Cliente].[Genero].[Genero].MEMBERS
+      * [Cliente].[Estado Civil].[Estado Civil].MEMBERS
+      * [Cliente].[Educacion].[Educacion].MEMBERS,
+        [Measures].[Ventas], BDESC ) ON ROWS
 FROM [Ventas Internet];
 
-// Problema 6: Promociones
+// Problema 6: Impacto de las promociones
 SELECT
-    { [Measures].[Ventas], [Measures].[Unidades], [Measures].[Utilidad] } ON COLUMNS,
-    NON EMPTY [Promocion].[Promocion].[Promocion].MEMBERS ON ROWS
+    { [Measures].[Ordenes], [Measures].[Unidades], [Measures].[Ventas], [Measures].[Utilidad] } ON COLUMNS,
+    NON EMPTY ORDER( [Promocion].[Promocion].[Promocion].MEMBERS,
+                     [Measures].[Ventas], BDESC ) ON ROWS
 FROM [Ventas Internet];
