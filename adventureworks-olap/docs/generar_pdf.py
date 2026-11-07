@@ -10,7 +10,7 @@ from reportlab.platypus.tableofcontents import TableOfContents
 from PIL import Image as PILImage
 
 IMG, OUT = sys.argv[1], sys.argv[2]
-NOMBRE = "Kevin Menéndez Zepeda"
+NOMBRE = "Kevin Menéndez"
 CARNE = "MZ232727"
 DOCENTE = "________________________________"
 GRUPO = "________"
@@ -102,27 +102,32 @@ def cover(c, d):
     c.setFont("Helvetica", 12)
     c.drawCentredString(W / 2, H - 1.2 * inch, "Facultad de Ingeniería · Educación a Distancia (UDB Virtual)")
     c.setFillColor(AZUL)
-    c.setFont("Helvetica", 14)
-    c.drawCentredString(W / 2, H - 2.6 * inch, "Asignatura: Datawarehouse y Minería de Datos (DMD941)")
-    c.setFont("Helvetica-Bold", 30)
-    c.drawCentredString(W / 2, H - 3.7 * inch, "Desafío Práctico 2")
-    c.setFont("Helvetica", 14)
+    c.setFont("Helvetica", 15)
+    c.drawCentredString(W / 2, H - 2.5 * inch, "Datawarehouse y Minería de Datos (DMD941)")
+    c.setFillColor(colors.black)
+    c.setFont("Helvetica", 12.5)
+    c.drawCentredString(W / 2, H - 2.85 * inch, "Desafío Práctico 2 — Experiencia de Aprendizaje 1")
+    c.setFillColor(AZUL)
+    c.setFont("Helvetica-Bold", 28)
+    c.drawCentredString(W / 2, H - 3.85 * inch, "Documento Técnico")
+    c.setFont("Helvetica-Oblique", 13)
     c.setFillColor(GRIS)
-    c.drawCentredString(W / 2, H - 4.15 * inch, "Cubo OLAP sobre AdventureWorksDW2022 con SQL Server Analysis Services")
-    c.drawCentredString(W / 2, H - 4.45 * inch, "y visualización de indicadores en Power BI")
+    c.drawCentredString(W / 2, H - 4.3 * inch, "Cubo OLAP, Consultas de Negocio y Visualización en Power BI")
+    c.drawCentredString(W / 2, H - 4.58 * inch, "AdventureWorksDW2022")
     c.setStrokeColor(AZUL)
     c.setLineWidth(1.2)
-    c.line(2 * inch, H - 4.85 * inch, W - 2 * inch, H - 4.85 * inch)
-    rows = [("Estudiante:", NOMBRE), ("Carné:", CARNE), ("Docente:", DOCENTE), ("Grupo:", GRUPO),
-            ("Modalidad:", "Individual"), ("Fecha de entrega:", "6 de noviembre de 2026")]
-    y = H - 5.6 * inch
+    c.line(2 * inch, H - 4.95 * inch, W - 2 * inch, H - 4.95 * inch)
+    rows = [("Autor:", NOMBRE), ("Carné:", CARNE), ("Agrupamiento:", "Individual"),
+            ("Fecha de entrega:", "6 de noviembre"),
+            ("Stack técnico:", "SQL Server 2022 + SSAS + Visual Studio + Power BI")]
+    y = H - 5.7 * inch
     for k, v in rows:
         c.setFont("Helvetica-Bold", 12)
         c.setFillColor(AZUL)
-        c.drawRightString(W / 2 - 0.1 * inch, y, k)
+        c.drawRightString(W / 2 - 0.6 * inch, y, k)
         c.setFont("Helvetica", 12)
         c.setFillColor(colors.black)
-        c.drawString(W / 2 + 0.1 * inch, y, v)
+        c.drawString(W / 2 - 0.4 * inch, y, v)
         y -= 0.38 * inch
     c.setFont("Helvetica", 10)
     c.setFillColor(GRIS)
