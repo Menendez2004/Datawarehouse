@@ -96,7 +96,6 @@ def cover(c, d):
     c.saveState()
     c.setFillColor(AZUL)
     c.rect(0, H - 0.25 * inch, W, 0.25 * inch, fill=1, stroke=0)
-    c.rect(0, 0, W, 0.5 * inch, fill=1, stroke=0)
     lw = 2.6 * inch
     lh = lw * 416 / 738
     c.drawImage(LOGO, (W - lw) / 2, H - 0.55 * inch - lh, lw, lh, mask="auto")
@@ -134,8 +133,6 @@ def cover(c, d):
     c.setFont("Helvetica", 10)
     c.setFillColor(GRIS)
     c.drawCentredString(W / 2, 1.0 * inch, "Repositorio: https://github.com/menendez2004/datawarehouse")
-    c.setFillColor(colors.white)
-    c.drawCentredString(W / 2, 0.2 * inch, "San Salvador, El Salvador · 2026")
     c.restoreState()
 
 
