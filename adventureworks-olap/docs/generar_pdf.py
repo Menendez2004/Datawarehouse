@@ -36,7 +36,6 @@ CELLB = ParagraphStyle("CELLB", parent=CELL, fontName="Helvetica-Bold", textColo
 fig_n = [0]
 MAXW = 6.5 * inch
 
-
 def fig(idx, caption, desc=None, maxh=4.1 * inch):
     path = os.path.join(IMG, f"i-{idx:03d}.png")
     w, h = PILImage.open(path).size
@@ -50,14 +49,11 @@ def fig(idx, caption, desc=None, maxh=4.1 * inch):
     parts += [im, Paragraph(f"Figura {fig_n[0]}. {caption}", CAP)]
     return KeepTogether(parts)
 
-
 def p(t):
     return Paragraph(t, BODY)
 
-
 def bullets(items):
     return [Paragraph(i, BUL, bulletText="•") for i in items]
-
 
 def table(rows, widths):
     data = [[Paragraph(str(c), CELLB if r == 0 else CELL) for c in row] for r, row in enumerate(rows)]
@@ -71,13 +67,11 @@ def table(rows, widths):
     ]))
     return t
 
-
 class Doc(BaseDocTemplate):
     def afterFlowable(self, f):
         if isinstance(f, Paragraph) and f.style.name in ("H1", "H2"):
             lvl = 0 if f.style.name == "H1" else 1
             self.notify("TOCEntry", (lvl, f.getPlainText(), self.page))
-
 
 def deco(c, d):
     c.saveState()
@@ -89,7 +83,6 @@ def deco(c, d):
     c.setLineWidth(0.6)
     c.line(inch, letter[1] - 0.6 * inch, letter[0] - inch, letter[1] - 0.6 * inch)
     c.restoreState()
-
 
 def cover(c, d):
     W, H = letter
@@ -135,7 +128,6 @@ def cover(c, d):
     c.drawCentredString(W / 2, 1.0 * inch, "Repositorio: https://github.com/menendez2004/datawarehouse")
     c.restoreState()
 
-
 doc = Doc(OUT, pagesize=letter, leftMargin=inch, rightMargin=inch, topMargin=0.85 * inch,
           bottomMargin=0.85 * inch, title="Desafío Práctico 2 - Cubo OLAP AdventureWorks",
           author=NOMBRE, subject="Datawarehouse y Minería de Datos (DMD941)")
@@ -146,13 +138,11 @@ doc.addPageTemplates([PageTemplate(id="cover", frames=[frame], onPage=cover),
 S = []
 S += [NextPageTemplate("body"), PageBreak()]
 
-# ---------------- Índice
 toc = TableOfContents()
 toc.levelStyles = [ParagraphStyle("t0", fontName="Helvetica-Bold", fontSize=11, leading=16, leftIndent=0),
                    ParagraphStyle("t1", fontName="Helvetica", fontSize=10, leading=14, leftIndent=18)]
 S += [Paragraph("Índice", ParagraphStyle("IDX", parent=H1)), toc, PageBreak()]
 
-# ---------------- 1. Introducción
 S.append(Paragraph("1. Introducción", H1))
 S.append(p("El presente documento describe el proceso completo para construir una solución de inteligencia de "
            "negocios sobre la base de datos de ejemplo <b>AdventureWorksDW2022</b> de Microsoft. Se instaló SQL Server "
@@ -193,7 +183,6 @@ S.append(KeepTogether([Paragraph("3.1 Problemas de negocio planteados", H2), tab
     ["6", "¿Qué impacto tienen las promociones en las ventas?"],
 ], [0.4 * inch, 6.1 * inch])]))
 
-# ---------------- 4. Instalación y restauración
 S.append(Paragraph("4. Instalación de SQL Server y restauración de la base de datos", H1))
 S.append(fig(0, "Instalación de SQL Server 2022 completada.",
              "Se instaló <b>SQL Server 2022 Developer</b> con instalación personalizada, seleccionando <i>Database "
@@ -241,7 +230,6 @@ S.append(table([
 ], [1.0 * inch, 2.6 * inch, 2.9 * inch]))
 S.append(PageBreak())
 
-# ---------------- 6. SQL
 S.append(Paragraph("6. Consultas SQL de los problemas de negocio", H1))
 S.append(p("Las consultas del script <i>03_problemas_negocio.sql</i> se escribieron con criterios de optimización: "
            "uniones por llaves sustitutas enteras (ya indexadas), agregación previa en expresiones de tabla comunes "
@@ -270,7 +258,6 @@ S.append(fig(15, "Problema 6: órdenes, unidades, ventas y utilidad por promoci�
              "de las ventas se realizó sin descuento."))
 S.append(PageBreak())
 
-# ---------------- 7. Cubo
 S.append(Paragraph("7. Diseño y creación del cubo OLAP", H1))
 S.append(Paragraph("7.1 Proyecto en Visual Studio", H2))
 S.append(fig(18, "Creación del proyecto Analysis Services Multidimensional.",
@@ -353,7 +340,6 @@ S.append(table([
 ], [1.3 * inch, 3.2 * inch, 2.0 * inch]))
 S.append(PageBreak())
 
-# ---------------- 8. Deploy y validación
 S.append(Paragraph("8. Despliegue, procesamiento y validación del cubo", H1))
 S.append(fig(33, "Miembro calculado Margen Pct y despliegue completado con éxito.",
              "En la pestaña <i>Calculations</i> se creó el miembro calculado <b>Margen Pct</b>. Luego se desplegó el "
@@ -386,7 +372,6 @@ S.append(table([
 ], [2.6 * inch, 1.95 * inch, 1.95 * inch]))
 S.append(PageBreak())
 
-# ---------------- 9. Power BI
 S.append(Paragraph("9. Visualización en Power BI", H1))
 S.append(fig(51, "Power BI Desktop conectado en vivo al cubo (Live connection: Connected).",
              "En Power BI Desktop se usó <i>Get data → SQL Server Analysis Services database</i>, con servidor "
@@ -402,7 +387,6 @@ S.append(fig(53, "Página 2 – Detalle: productos, territorios, clientes y prom
              "de promociones con unidades, ventas y utilidad (Problema 6)."))
 S.append(PageBreak())
 
-# ---------------- 10. Análisis
 S.append(Paragraph("10. Análisis de resultados", H1))
 S.append(Paragraph("Problema 1 – Evolución de ventas y utilidad", H2))
 S.append(table([

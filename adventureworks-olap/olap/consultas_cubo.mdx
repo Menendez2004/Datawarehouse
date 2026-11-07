@@ -1,11 +1,3 @@
-// =====================================================================
-// Desafío Práctico 2 - Consultas MDX para validar el cubo "Ventas Internet"
-// Ejecutar en SSMS: Connect -> Analysis Services -> New Query -> MDX
-// Base: AdventureWorksOLAP
-// Los resultados deben coincidir con sql/03_problemas_negocio.sql.
-// Ejecute cada consulta por separado (seleccionar + F5).
-// =====================================================================
-
 // 1
 SELECT
     { [Measures].[Ventas], [Measures].[Utilidad], [Measures].[Margen Pct] } ON COLUMNS,

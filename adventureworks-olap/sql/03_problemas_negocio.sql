@@ -1,30 +1,9 @@
--- =====================================================================
--- Desafío Práctico 2 - Paso 3: Consultas SQL para los problemas de negocio
--- Base: AdventureWorksDW2022   Hecho principal: dbo.FactInternetSales
---
--- Métricas utilizadas en todo el desafío (las mismas que tendrá el cubo):
---   Ventas    = SUM(SalesAmount)
---   Costo     = SUM(TotalProductCost)
---   Utilidad  = SUM(SalesAmount - TotalProductCost)
---   Margen %  = Utilidad / Ventas
---   Unidades  = SUM(OrderQuantity)
---   Órdenes   = COUNT(DISTINCT SalesOrderNumber)
---
--- Criterios de optimización aplicados:
---   * Se une por las llaves sustitutas (int) que ya están indexadas.
---   * Se agrega primero en el hecho y luego se une a dimensiones (CTE).
---   * Se seleccionan solo las columnas necesarias (sin SELECT *).
---   * NULLIF evita divisiones entre cero.
--- =====================================================================
 USE AdventureWorksDW2022;
 GO
-SET STATISTICS IO, TIME ON;   -- evidencia de rendimiento (pestaña Messages)
+SET STATISTICS IO, TIME ON;
 GO
 
--- ---------------------------------------------------------------------
--- Problema 1: ¿Cómo evolucionan las ventas y la utilidad por año y
--- trimestre? ¿Qué porcentaje de crecimiento hubo respecto al año anterior?
--- ---------------------------------------------------------------------
+-- 1
 WITH VentasAnuales AS (
     SELECT d.CalendarYear                              AS Anio,
            SUM(f.SalesAmount)                          AS Ventas,
@@ -42,7 +21,6 @@ FROM VentasAnuales
 ORDER BY Anio;
 GO
 
--- Detalle por trimestre
 SELECT d.CalendarYear                                          AS Anio,
        d.CalendarQuarter                                       AS Trimestre,
        CAST(SUM(f.SalesAmount) AS DECIMAL(18,2))               AS Ventas,
@@ -53,10 +31,7 @@ GROUP BY d.CalendarYear, d.CalendarQuarter
 ORDER BY Anio, Trimestre;
 GO
 
--- ---------------------------------------------------------------------
--- Problema 2: ¿Qué categorías y subcategorías de producto generan más
--- ingresos y cuál es su margen de utilidad?
--- ---------------------------------------------------------------------
+-- 2
 SELECT pc.SpanishProductCategoryName                                   AS Categoria,
        ps.SpanishProductSubcategoryName                                AS Subcategoria,
        SUM(f.OrderQuantity)                                            AS Unidades,
@@ -72,9 +47,7 @@ GROUP BY pc.SpanishProductCategoryName, ps.SpanishProductSubcategoryName
 ORDER BY Ventas DESC;
 GO
 
--- ---------------------------------------------------------------------
--- Problema 3: ¿Cuáles son los 10 productos más rentables?
--- ---------------------------------------------------------------------
+-- 3
 WITH UtilidadProducto AS (
     SELECT f.ProductKey,
            SUM(f.OrderQuantity)                      AS Unidades,
@@ -94,9 +67,7 @@ JOIN dbo.DimProduct p ON p.ProductKey = u.ProductKey
 ORDER BY u.Utilidad DESC;
 GO
 
--- ---------------------------------------------------------------------
--- Problema 4: ¿En qué regiones y países se concentran las ventas?
--- ---------------------------------------------------------------------
+-- 4
 SELECT st.SalesTerritoryGroup                                         AS Grupo,
        st.SalesTerritoryCountry                                       AS Pais,
        st.SalesTerritoryRegion                                        AS Region,
@@ -110,10 +81,7 @@ GROUP BY st.SalesTerritoryGroup, st.SalesTerritoryCountry, st.SalesTerritoryRegi
 ORDER BY Ventas DESC;
 GO
 
--- ---------------------------------------------------------------------
--- Problema 5: ¿Cuál es el perfil del cliente que más compra?
--- (género, estado civil, nivel educativo y rango de edad)
--- ---------------------------------------------------------------------
+-- 5
 WITH VentasCliente AS (
     SELECT c.CustomerKey,
            CASE c.Gender        WHEN 'M' THEN 'Masculino' ELSE 'Femenino' END AS Genero,
@@ -143,9 +111,7 @@ GROUP BY Genero, EstadoCivil, Educacion,
 ORDER BY Ventas DESC;
 GO
 
--- ---------------------------------------------------------------------
--- Problema 6: ¿Qué impacto tienen las promociones en las ventas?
--- ---------------------------------------------------------------------
+-- 6
 SELECT pr.SpanishPromotionName                                       AS Promocion,
        pr.SpanishPromotionType                                       AS TipoPromocion,
        CAST(pr.DiscountPct * 100 AS DECIMAL(5,2))                    AS DescuentoPct,
