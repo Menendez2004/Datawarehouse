@@ -117,7 +117,7 @@ def cover(c, d):
     c.setStrokeColor(AZUL)
     c.setLineWidth(1.2)
     c.line(2 * inch, H - 4.95 * inch, W - 2 * inch, H - 4.95 * inch)
-    rows = [("Autor:", NOMBRE), ("Carné:", CARNE), ("Agrupamiento:", "Individual"),
+    rows = [("Alumno:", NOMBRE), ("Carné:", CARNE), ("Docente:", "Ing. David Enrique Moya Aguilar"),
             ("Fecha de entrega:", "6 de noviembre"),
             ("Stack técnico:", "SQL Server 2022 + SSAS + Visual Studio + Power BI")]
     y = H - 5.7 * inch
